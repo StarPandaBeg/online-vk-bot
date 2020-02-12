@@ -9,6 +9,7 @@ import random
 
 VK_USER_TOKEN = str(os.environ.get("TOKEN"))
 VK_CONTROL_TOKEN = str(os.environ.get("ACCESS_TOKEN"))
+TIME_GMT = 10800
 
 def login(token):
     vk = vk_api.VkApi(token=token)
@@ -32,8 +33,8 @@ def run(api):
 # ------------
 def format_time(s):
     now_time = int(time.time())
-    next_time = now_time + s
-    resp = "Следущий онлайн будет в " + time.strftime("%H:%M %d.%m.%Y", time.localtime(now_time))
+    next_time = now_time + s + TIME_GMT
+    resp = "Следущий онлайн будет в " + time.strftime("%H:%M %d.%m.%Y", time.localtime(next_time))
     return resp
 
 def get_random():
@@ -57,6 +58,5 @@ def set_online(api, sec):
 
 
 if __name__ == "__main__":
-    time.timezone = -10800
     api = login(VK_USER_TOKEN)
     run(api)
