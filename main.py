@@ -57,5 +57,6 @@ def set_online(api, sec):
 
 
 if __name__ == "__main__":
+    time.timezone = -10800
     api = login(VK_USER_TOKEN)
     run(api)
