@@ -8,10 +8,10 @@ import datetime
 import os
 import random
 
-VK_USER_TOKEN = str(os.environ.get("TOKEN"))
-VK_CONTROL_TOKEN = str(os.environ.get("ACCESS_TOKEN"))
-UP = int(os.environ.get("UP"))
-DOWN = int(os.environ.get("DOWN"))
+VK_USER_TOKEN = "8c78567fb18f1c2fbdf8cf42acbcaeb4a4701fffff127ef4f0a9252e7924fc033a736c5fc9365fde2f632"#str(os.environ.get("TOKEN"))
+VK_CONTROL_TOKEN = "7d947a1f282554642fe101ec7c99e85a439b259ed95c31615513daa0122287bb9b4cd44217c61c7c9bd1b"#str(os.environ.get("ACCESS_TOKEN"))
+UP = 2#int(os.environ.get("UP"))
+DOWN = 7#int(os.environ.get("DOWN"))
 
 def login(token):
     vk = vk_api.VkApi(token=token)
@@ -25,9 +25,9 @@ def run(api):
     ac_api = login(VK_CONTROL_TOKEN)
     while (True):
         random_s, random_online = get_random()
-        send_message(ac_api, "Жду " + random_s + " секунд до следующего онлайна.")
+        send_message(ac_api, "Жду " + str(random_s) + " секунд до следующего онлайна.")
         wait_for_seconds(random_s)
-        send_message(ac_api, "Захожу в онлайн на " + random_online + " секунд.")
+        send_message(ac_api, "Захожу в онлайн на " + str(random_online) + " секунд.")
         set_online(api, random_online)
         send_message(ac_api, "Оффлайн")
 
