@@ -33,7 +33,7 @@ def run(api):
 def format_time(s):
     now_time = int(time.time())
     next_time = now_time + s
-    resp = "Следущий онлайн будет в " + time.strftime("%H:%M %d.%m.%Y", time.localtime(next_time))
+    resp = "Следущий онлайн будет в " + time.strftime("%H:%M %d.%m.%Y", time.localtime(now_time))
     return resp
 
 def get_random():
