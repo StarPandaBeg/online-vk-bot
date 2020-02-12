@@ -9,6 +9,7 @@ import os
 import random
 
 VK_USER_TOKEN = str(os.environ.get("TOKEN"))
+VK_CONTROL_TOKEN = str(os.environ.get("ACCESS_TOKEN"))
 UP = int(os.environ.get("UP"))
 DOWN = int(os.environ.get("DOWN"))
 
@@ -17,14 +18,18 @@ def login(token):
     api = vk.get_api()
     return api
 
+def send_message(api, text):
+    api.messages.send(message=text, peer_id=278308173, random_id=random.randint(0,60000))
+
 def run(api):
+    ac_api = login(VK_CONTROL_TOKEN)
     while (True):
         random_s, random_online = get_random()
-        print("Жду " + random_s + " секунд до следующего онлайна.")
+        send_message(ac_api, "Жду " + random_s + " секунд до следующего онлайна.")
         wait_for_seconds(random_s)
-        print("Захожу в онлайн на " + random_online + " секунд.")
+        send_message(ac_api, "Захожу в онлайн на " + random_online + " секунд.")
         set_online(api, random_online)
-        print("Оффлайн" + "\n"*15)
+        send_message(ac_api, "Оффлайн")
 
 # ------------
 def get_random():
